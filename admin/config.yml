@@ -2,8 +2,7 @@ backend:
   name: github
   repo: alexmaglez/laura-rrss
   branch: main
-  base_url: https://famous-kashata-21dc31.netlify.app
-  auth_endpoint: auth
+  base_url: https://musical-proyects.vercel.app
 
 media_folder: "assets/imagenes"
 
