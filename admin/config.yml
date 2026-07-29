@@ -5,6 +5,7 @@ backend:
   base_url: https://musical-proyects.vercel.app
 
 media_folder: "assets/imagenes"
+public_folder: "assets/imagenes"
 
 collections:
   - name: "portfolio"
