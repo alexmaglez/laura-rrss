@@ -17,11 +17,11 @@
       "imagen": "assets/imagenes/foodisiac2.png"
     },
     {
-      "titulo": "REEL itsomi",
-      "imagen": "assets/imagenes/captura-2026-07-29-a-las-23.36.19.png",
-      "tienda": "ITSOMI",
+      "titulo": "ITSOMI",
+      "tienda": "Itsomi Clothes",
       "ciudad": "Sotogrande",
-      "descripcion": "Contenido orgánico de redes para la tienda ITSOMI"
+      "descripcion": "Campaña de publicidad para la exitosa boutique de ropa Itsomi",
+      "imagen": "assets/imagenes/captura-2026-07-29-a-las-23.36.19.png"
     }
   ]
 }
