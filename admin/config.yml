@@ -7,14 +7,20 @@ backend:
 media_folder: "assets/imagenes"
 
 collections:
-  - name: "publicaciones"
-    label: "Publicaciones"
-    folder: "data/publicaciones"
-    create: true
-    fields:
-      - {label: "Título", name: "titulo", widget: "string"}
-      - {label: "Fecha", name: "fecha", widget: "date"}
-      - {label: "Tienda / Cliente", name: "tienda", widget: "string"}
-      - {label: "Ciudad", name: "ciudad", widget: "select", options: ["Sotogrande", "Madrid"]}
-      - {label: "Descripción", name: "descripcion", widget: "text"}
-      - {label: "Imagen o vídeo", name: "media", widget: "image", required: false}
+  - name: "portfolio"
+    label: "Portfolio"
+    files:
+      - name: "publicaciones"
+        label: "Publicaciones"
+        file: "data/portfolio.json"
+        fields:
+          - name: "items"
+            label: "Publicaciones"
+            widget: "list"
+            fields:
+              - {label: "Título", name: "titulo", widget: "string"}
+              - {label: "Tienda / Cliente", name: "tienda", widget: "string"}
+              - {label: "Ciudad", name: "ciudad", widget: "select", options: ["Sotogrande", "Madrid"]}
+              - {label: "Fecha", name: "fecha", widget: "date"}
+              - {label: "Descripción", name: "descripcion", widget: "text", required: false}
+              - {label: "Imagen", name: "imagen", widget: "image"}

@@ -1,0 +1,20 @@
+{
+  "items": [
+    {
+      "titulo": "Campaña Foodisiac",
+      "tienda": "Foodisiac",
+      "ciudad": "Sotogrande",
+      "fecha": "2026-06-01",
+      "descripcion": "Producción de contenido de marca para el restaurante Foodisiac en Sotogrande.",
+      "imagen": "assets/imagenes/foodisiac1.png"
+    },
+    {
+      "titulo": "Campaña Foodisiac II",
+      "tienda": "Foodisiac",
+      "ciudad": "Sotogrande",
+      "fecha": "2026-06-01",
+      "descripcion": "Sesión de contenido para redes sociales, campaña Foodisiac.",
+      "imagen": "assets/imagenes/foodisiac2.png"
+    }
+  ]
+}
