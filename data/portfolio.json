@@ -15,6 +15,13 @@
       "fecha": "2026-06-01",
       "descripcion": "Sesión de contenido para redes sociales, campaña Foodisiac.",
       "imagen": "assets/imagenes/foodisiac2.png"
+    },
+    {
+      "titulo": "Itsomi",
+      "tienda": "Itsomi Boutique",
+      "ciudad": "Sotogrande",
+      "descripcion": "Contenido de redes sociales para la exitosa boutique Itsomi",
+      "imagen": "/assets/imagenes/captura-2026-07-29-a-las-23.36.19.png"
     }
   ]
 }
