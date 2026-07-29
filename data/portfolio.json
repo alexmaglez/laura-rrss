@@ -17,11 +17,11 @@
       "imagen": "assets/imagenes/foodisiac2.png"
     },
     {
-      "titulo": "ITSOMI",
-      "tienda": "Itsomi Clothes",
+      "titulo": "Itsomi",
+      "tienda": "Itsomi Boutique",
       "ciudad": "Sotogrande",
-      "descripcion": "Campaña de publicidad para la exitosa boutique de ropa Itsomi",
-      "imagen": "assets/imagenes/captura-2026-07-29-a-las-23.36.19.png"
+      "descripcion": "Contenido de redes sociales para la exitosa boutique Itsomi",
+      "imagen": "/assets/imagenes/captura-2026-07-29-a-las-23.36.19.png"
     }
   ]
 }
