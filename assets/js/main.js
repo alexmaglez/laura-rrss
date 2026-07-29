@@ -77,6 +77,8 @@
     return formatted.charAt(0).toUpperCase() + formatted.slice(1);
   };
 
+  const resolveImagePath = (path) => path.replace(/^\//, "");
+
   const buildPortfolioCard = (item, index) => {
     const article = document.createElement("article");
     article.className = "portfolio__item" + (index % 2 === 1 ? " portfolio__item--reverse" : "");
@@ -87,7 +89,7 @@
 
     if (item.imagen) {
       const img = document.createElement("img");
-      img.src = item.imagen;
+      img.src = resolveImagePath(item.imagen);
       img.alt = item.titulo || item.tienda || "Publicación del portfolio";
       img.loading = "lazy";
       figure.appendChild(img);
