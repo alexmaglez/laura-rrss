@@ -19,6 +19,10 @@
   --gutter: clamp(1.25rem, 4vw, 3.5rem);
 
   --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Fallback used only before main.js measures the real (auto) header
+     height; kept generous so a 2-line mobile nav never overlaps the hero. */
+  --header-height: 120px;
 }
 
 /* ---------------------------------- reset ---------------------------------- */
@@ -175,10 +179,11 @@ section {
 }
 
 .signature--mini {
-  font-size: 1.6rem;
+  font-size: clamp(1.05rem, 5vw, 1.6rem);
   color: var(--grafito);
   clip-path: none;
   transition: none;
+  white-space: nowrap;
 }
 
 .signature--mini::after {
@@ -226,9 +231,12 @@ section {
   left: 0;
   right: 0;
   z-index: 100;
+  height: auto;
+  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   padding: 1.1rem var(--gutter);
   background: rgba(245, 233, 227, 0.72);
   backdrop-filter: blur(10px);
@@ -240,6 +248,17 @@ section {
   box-shadow: 0 1px 0 rgba(42, 33, 31, 0.08);
 }
 
+/* Below this, logo + nav no longer fit on one row without overflowing
+   sideways — stack them instead of letting content spill off-screen.
+   Whatever height results is picked up live by --header-height. */
+@media (max-width: 480px) {
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
 .logo-mark {
   display: block;
 }
@@ -248,8 +267,17 @@ section {
   display: flex;
   gap: clamp(1rem, 3vw, 2.2rem);
   flex-wrap: wrap;
+  justify-content: flex-end;
+  min-width: 0;
+  width: 100%;
   font-size: 0.85rem;
   letter-spacing: 0.04em;
+}
+
+@media (min-width: 481px) {
+  .site-nav {
+    width: auto;
+  }
 }
 
 .site-nav a {
@@ -284,6 +312,15 @@ section {
   grid-template-columns: 1fr;
   grid-template-rows: 56vh 1fr;
   padding: 0;
+}
+
+/* Below the desktop split layout (900px breakpoint), .site-header can grow
+   to two lines. Reserve real space for it (measured live in main.js and
+   written to --header-height) so it never overlaps the hero photo. */
+@media (max-width: 899px) {
+  .hero {
+    padding-top: var(--header-height);
+  }
 }
 
 .hero__media {

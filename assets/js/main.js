@@ -3,7 +3,7 @@
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---------------------------------- header shadow on scroll ---------------------------------- */
+  /* ---------------------------------- header shadow + real height ---------------------------------- */
   const header = document.querySelector(".site-header");
   if (header) {
     const toggleHeaderShadow = () => {
@@ -11,6 +11,20 @@
     };
     toggleHeaderShadow();
     window.addEventListener("scroll", toggleHeaderShadow, { passive: true });
+
+    // The header's height is auto (grows to two lines on narrow screens),
+    // so the hero reserves space via this measured value instead of a
+    // guessed fixed pixel amount — see --header-height in style.css.
+    const setHeaderHeightVar = () => {
+      document.documentElement.style.setProperty("--header-height", `${header.offsetHeight}px`);
+    };
+    setHeaderHeightVar();
+
+    if ("ResizeObserver" in window) {
+      new ResizeObserver(setHeaderHeightVar).observe(header);
+    } else {
+      window.addEventListener("resize", setHeaderHeightVar);
+    }
   }
 
   /* ---------------------------------- scroll reveal ---------------------------------- */
