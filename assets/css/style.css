@@ -691,6 +691,67 @@ section {
   }
 }
 
+/* ---------------------------------- custom cursor (corazones) ---------------------------------- */
+.cursor-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  display: none;
+}
+
+.cursor-heart {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
+  pointer-events: none;
+  z-index: 9999;
+  display: none;
+  will-change: transform;
+}
+
+.cursor-heart__glyph {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: var(--baya);
+  transition: transform 0.25s var(--ease-editorial), color 0.25s ease;
+}
+
+.cursor-heart.is-active .cursor-heart__glyph {
+  transform: scale(1.45);
+  color: var(--rosa);
+}
+
+.cursor-trail-heart {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  color: var(--rosa);
+  pointer-events: none;
+  z-index: 9997;
+  display: none;
+  will-change: transform, opacity;
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  * {
+    cursor: none;
+  }
+
+  .cursor-layer,
+  .cursor-heart,
+  .cursor-trail-heart {
+    display: block;
+  }
+}
+
 /* ---------------------------------- reduced motion ---------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   html {

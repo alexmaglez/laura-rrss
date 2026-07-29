@@ -187,4 +187,94 @@
         portfolioGrid.appendChild(error);
       });
   }
+
+  /* ---------------------------------- custom heart cursor ---------------------------------- */
+  const supportsFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  if (supportsFinePointer && !prefersReducedMotion) {
+    const HEART_SVG =
+      '<svg viewBox="0 0 24 24" width="100%" height="100%" aria-hidden="true">' +
+      '<path fill="currentColor" d="M12 21s-6.72-4.36-9.33-8.13C1 10.84 1.5 7.55 4.24 6.05c2.23-1.22 4.62-.39 5.82 1.42L12 9.3l1.94-1.83c1.2-1.81 3.6-2.64 5.82-1.42 2.74 1.5 3.24 4.79 1.57 6.82C18.72 16.64 12 21 12 21z"/>' +
+      "</svg>";
+
+    const POOL_SIZE = 18;
+    const SPAWN_THROTTLE_MS = 50;
+    const TRAIL_DURATION_MS = 500;
+    const LERP_FACTOR = 0.22;
+
+    const cursorEl = document.createElement("div");
+    cursorEl.className = "cursor-heart";
+    cursorEl.innerHTML = `<span class="cursor-heart__glyph">${HEART_SVG}</span>`;
+    document.body.appendChild(cursorEl);
+
+    const trailLayer = document.createElement("div");
+    trailLayer.className = "cursor-layer";
+    document.body.appendChild(trailLayer);
+
+    const trailPool = Array.from({ length: POOL_SIZE }, () => {
+      const el = document.createElement("div");
+      el.className = "cursor-trail-heart";
+      el.innerHTML = HEART_SVG;
+      trailLayer.appendChild(el);
+      return el;
+    });
+    let poolIndex = 0;
+
+    const mouse = { x: -100, y: -100 };
+    const cursorPos = { x: -100, y: -100 };
+    let lastSpawn = 0;
+
+    const spawnTrailHeart = (x, y) => {
+      const el = trailPool[poolIndex];
+      poolIndex = (poolIndex + 1) % trailPool.length;
+
+      el.getAnimations().forEach((anim) => anim.cancel());
+      el.animate(
+        [
+          { transform: `translate3d(${x}px, ${y}px, 0) scale(1)`, opacity: 0.85 },
+          { transform: `translate3d(${x}px, ${y}px, 0) scale(0.35)`, opacity: 0 },
+        ],
+        { duration: TRAIL_DURATION_MS, easing: "ease-out", fill: "forwards" }
+      );
+    };
+
+    const onMove = (event) => {
+      mouse.x = event.clientX;
+      mouse.y = event.clientY;
+
+      const now = performance.now();
+      if (now - lastSpawn >= SPAWN_THROTTLE_MS) {
+        lastSpawn = now;
+        spawnTrailHeart(mouse.x, mouse.y);
+      }
+    };
+
+    const tick = () => {
+      cursorPos.x += (mouse.x - cursorPos.x) * LERP_FACTOR;
+      cursorPos.y += (mouse.y - cursorPos.y) * LERP_FACTOR;
+      cursorEl.style.transform = `translate3d(${cursorPos.x}px, ${cursorPos.y}px, 0)`;
+      requestAnimationFrame(tick);
+    };
+
+    window.addEventListener("mousemove", onMove, { passive: true });
+    requestAnimationFrame(tick);
+
+    const isInteractive = (target) => target.closest && target.closest("a, button, .btn");
+
+    document.addEventListener(
+      "pointerover",
+      (event) => {
+        if (isInteractive(event.target)) cursorEl.classList.add("is-active");
+      },
+      { passive: true }
+    );
+
+    document.addEventListener(
+      "pointerout",
+      (event) => {
+        if (isInteractive(event.target)) cursorEl.classList.remove("is-active");
+      },
+      { passive: true }
+    );
+  }
 })();
